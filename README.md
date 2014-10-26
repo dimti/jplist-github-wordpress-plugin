@@ -52,12 +52,10 @@ jPList CDN is provided by [cdnjs](http://www.cdnjs.com):
 - Works with jQuery 2.x versions
 
 ##License
-- For non-commercial, personal, or open source projects and applications, 
-you may use jPList for free http://www.binpress.com/license/read/id/2749/app/2085
-- If your project generates any type of income, e.g. sells products, ads, services or just represents a commercial company, you should get a commercial license at [www.binpress.com](http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085?ad=34027)
+- The MIT License (MIT) http://opensource.org/licenses/MIT
 
 ##Links
 - [Project Home](http://jplist.com)
-- [jPList on Binpress](http://www.binpress.com/app/jplist-jquery-data-grid-controls/2085?ad=34027)
 - [jPList on Facebook](https://www.facebook.com/jplist)
 - [jPList on Google+](https://plus.google.com/+Jplistjs)
+- [jPList on Twitter](https://twitter.com/jquery_jplist)
