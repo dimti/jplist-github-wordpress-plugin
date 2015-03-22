@@ -83,7 +83,7 @@
 				$this->jplist_options_page = add_options_page('jPList Settings' 
 																 ,'jPList' 
 																 ,'manage_options'
-																 ,basename(__FILE__) 
+																 ,plugin_basename( __FILE__ ) 
 																 ,array(&$this, 'settings_page_content'));
 			}
 		}
