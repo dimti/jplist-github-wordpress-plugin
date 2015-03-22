@@ -5,6 +5,9 @@
 ###Examples
 - [Demo Page](http://wordpress.jplist.com/jplist-for-posts-sorting-filtering-and-pagination)
 
+###Installation
+- [Standard WordPress plugin installation](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+
 ###Sorting
 - Sort posts by title asc or desc
 - Sort posts by date asc or desc
