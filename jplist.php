@@ -41,7 +41,7 @@ If your project generates any type of income, e.g. sells products, ads, services
 			
 			//init includes path
 			$this->jplist_abs_path = dirname(__FILE__); //ABSPATH
-			$this->jplist_relative_path = get_bloginfo('wpurl') . '/wp-content/plugins/jplist';
+			$this->jplist_relative_path = plugins_url('jplist');
 					
 			//includes
 			require_once($this->jplist_abs_path . '/php/domain/shortcodes.php');
