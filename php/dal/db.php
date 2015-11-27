@@ -308,7 +308,7 @@ class jplist_db{
 			//count database items for pagination
 			//$query = "SELECT count(ID) FROM wp_posts " . $filter . " " . $sort;			
 			$query = "";
-			$query .= "SELECT count(ID) ";
+			$query .= "SELECT count(DISTINCT ID) ";
 			$query .= "FROM $wpdb->posts ";
 			$query .= "INNER JOIN $wpdb->term_relationships ON $wpdb->posts.ID  = $wpdb->term_relationships.object_id ";
 			$query .= "INNER JOIN $wpdb->terms ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id ";
