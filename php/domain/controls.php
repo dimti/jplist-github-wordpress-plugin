@@ -75,7 +75,7 @@
 				'exclude'                  => '',
 				'include'                  => '',
 				'number'                   => '',
-				'taxonomy'                 => 'category',
+				'taxonomy'                 => 'otmetki',
 				'pad_counts'               => false
 			);
 
