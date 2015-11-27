@@ -264,7 +264,8 @@ class jplist_db{
 	* @return {Object} json - posts
 	*/
 	public function get_posts_json($statuses){
-		
+		global $wpdb, $post, $et_ptemplate_settings, $et_ptemplate_words, $et_ptemplate_height, $et_ptemplate_column, $et_ptemplate_main_cont;
+
 		//init properties
 		$this->statuses = $statuses;	
 		$json = "[]";		
@@ -308,9 +309,9 @@ class jplist_db{
 			//$query = "SELECT count(ID) FROM wp_posts " . $filter . " " . $sort;			
 			$query = "";
 			$query .= "SELECT count(ID) ";
-			$query .= "FROM wp_posts ";
-			$query .= "INNER JOIN wp_term_relationships ON wp_posts.ID  = wp_term_relationships.object_id ";
-			$query .= "INNER JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id ";
+			$query .= "FROM $wpdb->posts ";
+			$query .= "INNER JOIN $wpdb->term_relationships ON $wpdb->posts.ID  = $wpdb->term_relationships.object_id ";
+			$query .= "INNER JOIN $wpdb->terms ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id ";
 			$query .= $filter . " " . $sort;
 			
 			if(count($preparedParams) > 0){
@@ -340,10 +341,10 @@ class jplist_db{
 			WHERE `post_status` = 'publish' and `post_type` = 'post' 
 			*/
 			$query = "";
-			$query .= "SELECT wp_posts.ID, wp_posts.post_date, wp_posts.post_content, wp_posts.post_title, wp_posts.post_name, wp_posts.comment_count, wp_terms.name, wp_terms.slug ";
-			$query .= "FROM wp_posts ";
-			$query .= "INNER JOIN wp_term_relationships ON wp_posts.ID  = wp_term_relationships.object_id ";
-			$query .= "INNER JOIN wp_terms ON wp_term_relationships.term_taxonomy_id = wp_terms.term_id ";
+			$query .= "SELECT DISTINCT $wpdb->posts.ID, $wpdb->posts.post_date, $wpdb->posts.post_content, $wpdb->posts.post_excerpt, $wpdb->posts.post_title, $wpdb->posts.post_name, $wpdb->posts.comment_count ";
+			$query .= "FROM $wpdb->posts ";
+			$query .= "INNER JOIN $wpdb->term_relationships ON $wpdb->posts.ID  = $wpdb->term_relationships.object_id ";
+			$query .= "INNER JOIN $wpdb->terms ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->terms.term_id ";
 			$query .= $filter . " " . $sort . " " . $paging;
 			//$query = "SELECT * FROM wp_posts " . $filter . " " . $sort . " " . $paging;
 									
@@ -359,22 +360,49 @@ class jplist_db{
 			else{
 				$items = $this->wpdb->get_results($query, OBJECT);
 			}
-			
+
+
 			$json = "[";
 			foreach($items as $post){
 				
 				if($counter > 0){
 					$json .= ",";
 				}
-				
+
+				$et_ptemplate_settings = array();
+				$et_ptemplate_settings = maybe_unserialize( get_post_meta($post->ID,'et_ptemplate_settings',true) );
+
+				$et_ptemplate_words = isset( $et_ptemplate_settings['et_ptemplate_words'] ) ? (int) $et_ptemplate_settings['et_ptemplate_words'] : 30;
+
+				$et_ptemplate_height = isset( $et_ptemplate_settings['et_ptemplate_height'] ) ? (int) $et_ptemplate_settings['et_ptemplate_height'] : 350;
+
+				$et_ptemplate_column = isset( $et_ptemplate_settings['et_ptemplate_column'] ) ? (int) $et_ptemplate_settings['et_ptemplate_column'] : 1;
+
+				$et_ptemplate_main_cont = isset( $et_ptemplate_settings['et_ptemplate_main_cont'] ) ? (int) $et_ptemplate_settings['et_ptemplate_main_cont'] : 1;
+
 				//add additional properties
 				$link = get_permalink($post->ID);
-				$thumb = get_the_post_thumbnail($post->ID, 'thumbnail', '');
-				$excerpt = wp_trim_words($post->post_content);
+				$thumbnail = wp_get_attachment_image_src ( get_post_thumbnail_id ( $post->ID ),'full');
+				$thumbnail1 = get_post_meta($post->ID, 'Thumbnail', true);
+				if( !empty ($thumbnail )){
+					$thumb = $thumbnail[0];
+				} elseif(!empty ($thumbnail1)){
+					$thumb = $thumbnail1;
+				} else{
+					$thumb = false;
+				}
+				$content = trim(html_entity_decode(explode('!--more--', $post->post_content)[0]));
+				$words = explode(" ",strip_tags($content));
+				$excerpt = implode(" ",array_splice($words,0,$et_ptemplate_words));
+//				$excerpt = $query;
 				$date = get_the_date('', $post->ID);
 				$time = get_the_time('', $post->ID);
 				$hidden_date = get_the_date('Y-n-j ', $post->ID);
 				$hidden_time = get_the_time('G-i-s', $post->ID);
+
+				$new = get_post_meta($post->ID, 'new', true);
+				$old_price = get_post_meta($post->ID, 'old_price', true);
+				$price = get_post_meta($post->ID, 'cost_1', true);
 				
 				$post->link = $link;
 				$post->thumb = $thumb;
@@ -383,7 +411,13 @@ class jplist_db{
 				$post->time = $time;
 				$post->hidden_date = $hidden_date;
 				$post->hidden_time = $hidden_time;
-				
+				$post->new = $hidden_time;
+				$post->old_price = $old_price;
+				$post->price = $price;
+				$post->height = $et_ptemplate_height;
+				unset($post->post_content);
+				unset($post->post_excerpt);
+
 				$json .= json_encode($post);
 				
 				$counter++;
