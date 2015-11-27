@@ -56,7 +56,7 @@ If your project generates any type of income, e.g. sells products, ads, services
 			//init jplist classes
 			$this->db = new jplist_db();
 			$this->jplist_options = new jplist_options();
-			$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
+//			$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
 			$this->jplist_shortcodes = new jplist_shortcodes($this->jplist_relative_path, $this->jplist_options, $this->jplist_controls);	
 
 			//init admin

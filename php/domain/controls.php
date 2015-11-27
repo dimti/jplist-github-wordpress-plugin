@@ -33,7 +33,7 @@
 			
 			//init properties
 			$this->jplist_relative_path = $jplist_relative_path;
-			
+
 			//init default controls html
 			$this->reset_btn = $this->get_reset_btn_html();
 			$this->items_per_page = $this->get_items_per_page_html();
@@ -62,9 +62,8 @@
 		* checkbox filter for categories
 		*/
 		public function jplist_categories_checkbox_filter(){
-			
 			$html = "";
-			
+
 			$args = array(
 				'type'                     => 'post',
 				'child_of'                 => 0,
@@ -78,7 +77,7 @@
 				'number'                   => '',
 				'taxonomy'                 => 'category',
 				'pad_counts'               => false
-			); 
+			);
 
 			$categories = get_categories($args);
 			
@@ -117,7 +116,7 @@
 				$html .= "\tdata-control-type='preloader' \r\n";
 				$html .= "\tdata-control-name='preloader' \r\n";
 				$html .= "\tdata-control-action='preloader'>\r\n";
-				$html .= "\t<img src='" . $this->jplist_relative_path . "/content/img/common/ajax-loader-line.gif' alt='Loading...' title='Loading...' />\r\n";
+				$html .= "\t<img src='" . $this->jplist_relative_path . "/content/img/common/ajax-loader-line.gif' alt='Загрузка...' title='Загрузка...' />\r\n";
 			$html .= "</div>\r\n\r\n";
 			
 			return $html;
@@ -236,7 +235,7 @@
 				 $html .= "data-control-type='reset' \r\n";
 				 $html .= "data-control-name='reset' \r\n";
 				 $html .= "data-control-action='reset'>\r\n";
-				 $html .= "\tReset  <i class='fa fa-share'></i>\r\n";
+				 $html .= "\tОчистить  <i class='fa fa-share'></i>\r\n";
 			$html .= "</button>\r\n\r\n";
 			
 			return $html;
@@ -257,10 +256,10 @@
 				$html .= "data-control-action='paging'>\r\n";
 			 
 				$html .= "\t<ul>\r\n";
-					$html .= "\t\t<li><span data-number='3'> 3 per page </span></li>\r\n";
-					$html .= "\t\t<li><span data-number='5' data-default='true'> 5 per page </span></li>\r\n";
-					$html .= "\t\t<li><span data-number='10'> 10 per page </span></li>\r\n";
-					$html .= "\t\t<li><span data-number='all'> view all </span></li>\r\n";
+					$html .= "\t\t<li><span data-number='3'> 3 на страницу </span></li>\r\n";
+					$html .= "\t\t<li><span data-number='6' data-default='true'> 6 на страницу </span></li>\r\n";
+					$html .= "\t\t<li><span data-number='12'> 12 на страницу </span></li>\r\n";
+					$html .= "\t\t<li><span data-number='all'> посмотреть все </span></li>\r\n";
 				$html .= "\t</ul>\r\n";
 			$html .= "</div>\r\n\r\n";
 			
@@ -283,13 +282,13 @@
 				 $html .= "data-datetime-format='{year}-{month}-{day}-{hour}-{min}-{sec}'>\r\n";
 				 
 				 $html .= "\t<ul>\r\n";
-					$html .= "\t\t<li><span data-path='default'>Sort by</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-title' data-order='asc' data-type='text'>Post Title A-Z</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-title' data-order='desc' data-type='text'>Post Title Z-A</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-date' data-order='asc' data-type='datetime'>Post Date asc</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-date' data-order='desc' data-type='datetime'>Post Date desc</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-comments' data-order='asc' data-type='number'>Comments asc</span></li>\r\n";
-					$html .= "\t\t<li><span data-path='.jplist-comments' data-order='desc' data-type='number'>Comments desc</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='default'>Сортировать по</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-title' data-order='asc' data-type='text'>Имени А-Я</span></li>\r\n";
+					$html .= "\t\t<li><span data-path='.jplist-title' data-order='desc' data-type='text'>Имени в обратном порядке Я-А</span></li>\r\n";
+//					$html .= "\t\t<li><span data-path='.jplist-date' data-order='asc' data-type='datetime'>Post Date asc</span></li>\r\n";
+//					$html .= "\t\t<li><span data-path='.jplist-date' data-order='desc' data-type='datetime'>Post Date desc</span></li>\r\n";
+//					$html .= "\t\t<li><span data-path='.jplist-comments' data-order='asc' data-type='number'>Comments asc</span></li>\r\n";
+//					$html .= "\t\t<li><span data-path='.jplist-comments' data-order='desc' data-type='number'>Comments desc</span></li>\r\n";
 				 $html .= "\t</ul>\r\n";
 			$html .= "</div>\r\n\r\n";
 			
@@ -307,14 +306,14 @@
 			$html .= "<div class='text-filter-box'>\r\n";
 			 
 			$html .= "\t<!--[if lt IE 10]>\r\n";
-			$html .= "\t<div class='jplist-label'>Filter by Post Title:</div>\r\n";
+			$html .= "\t<div class='jplist-label'>Фильтр по названию:</div>\r\n";
 			$html .= "\t<![endif]-->\r\n\r\n";
 			 
 			$html .= "\t<input \r\n";
 				$html .= "\tdata-path='.jplist-title' \r\n";
 				$html .= "\ttype='text' \r\n";
 				$html .= "\tvalue='' \r\n";
-				$html .= "\tplaceholder='Filter by Post Title' \r\n";
+				$html .= "\tplaceholder='Фильтр по названию' \r\n";
 				$html .= "\tdata-control-type='textbox' \r\n";
 				$html .= "\tdata-control-name='title-filter' \r\n";
 				$html .= "\tdata-control-action='filter' \r\n";
@@ -343,14 +342,14 @@
 			$html .= "<div class='text-filter-box'>\r\n";
 			 
 			$html .= "\t<!--[if lt IE 10]>\r\n";
-			$html .= "\t<div class='jplist-label'>Filter by Content:</div>\r\n";
+			$html .= "\t<div class='jplist-label'>Фильтр по описанию:</div>\r\n";
 			$html .= "\t<![endif]-->\r\n\r\n";
 			 
 			$html .= "\t<input \r\n";
 				$html .= "\tdata-path='.jplist-content' \r\n";
 				$html .= "\ttype='text' \r\n";
 				$html .= "\tvalue='' \r\n";
-				$html .= "\tplaceholder='Filter by Content' \r\n";
+				$html .= "\tplaceholder='Фильтр по описанию' \r\n";
 				$html .= "\tdata-control-type='textbox' \r\n";
 				$html .= "\tdata-control-name='content-filter' \r\n";
 				$html .= "\tdata-control-action='filter' \r\n";
@@ -380,10 +379,10 @@
 				 $html .= "\tclass='jplist-label' \r\n";
 				 
 				 if($is_bottom){
-					$html .= "\tdata-type='{start} - {end} of {all}' \r\n";
+					$html .= "\tdata-type='{start} - {end} из {all}' \r\n";
 				 }
 				 else{
-					$html .= "\tdata-type='Page {current} of {pages}' \r\n";
+					$html .= "\tdata-type='Страница {current} из {pages}' \r\n";
 				 }
 				 
 				 $html .= "\tdata-control-type='pagination-info' \r\n"; 

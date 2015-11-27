@@ -50,8 +50,8 @@
 		* reset js panel -> ajax callback
 		*/
 		public function reset_js_panel_callback(){
-		
-			delete_option($this->jplist_options->jplist_js);	
+			delete_option($this->jplist_options->jplist_js);
+			$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
 			echo($this->jplist_controls->js_settings);
 			die();
 		}
@@ -60,9 +60,9 @@
 		* reset top panel -> ajax callback
 		*/
 		public function reset_top_panel_callback(){
-		
-			delete_option($this->jplist_options->jplist_top);	
-			echo($this->jplist_controls->top_panel);		
+			delete_option($this->jplist_options->jplist_top);
+			$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
+			echo($this->jplist_controls->top_panel);
 			die();
 		}
 		
@@ -70,8 +70,8 @@
 		* reset bottom panel -> ajax callback
 		*/
 		public function reset_bot_panel_callback(){
-		
-			delete_option($this->jplist_options->jplist_bot);	
+			delete_option($this->jplist_options->jplist_bot);
+			$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
 			echo($this->jplist_controls->bot_panel);
 			die();
 		}
@@ -80,8 +80,8 @@
 		* reset template panel -> ajax callback
 		*/
 		public function reset_js_template_callback(){
-		
-			delete_option($this->jplist_options->jplist_template);	
+			delete_option($this->jplist_options->jplist_template);
+			$this->jplist_controls = new jplist_controls($this->jplist_relative_path);
 			echo($this->jplist_controls->template);
 			die();
 		}
