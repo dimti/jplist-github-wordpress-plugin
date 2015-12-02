@@ -50,6 +50,19 @@ class jplist_db{
 		
 		return $query;
 	}
+
+	function getSelectFilterQuery($keyword, $path, &$preparedParams){
+
+		$query = "";
+
+		//replace dot
+		$path = str_replace(array("."), "", $path);
+
+		$query .= " " . $keyword . " like '%%%s%%' ";
+		array_push($preparedParams, "$path");
+
+		return $query;
+	}
 	
 	/**
 	* get sort query
@@ -186,6 +199,27 @@ class jplist_db{
 								$query = " and (" . $filter . ")";
 							}
 						}						
+					}
+					break;
+				}
+
+				case "uhod":
+				case "tip_kozhi":
+				case "tip_sredstva":
+				case "collekcii":{
+					if(isset($data->path) && $data->path){
+						$prevQueryNotEmpty = strrpos($prevQuery, "where");
+						$query = "";
+						$filter = $this->getSelectFilterQuery("slug", $data->path, $preparedParams);
+
+						if($filter){
+							if($prevQueryNotEmpty === false){
+								$query = "where " . $filter;
+							}
+							else{
+								$query = " and (" . $filter . ")";
+							}
+						}
 					}
 					break;
 				}

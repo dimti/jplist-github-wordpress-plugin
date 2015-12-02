@@ -99,6 +99,119 @@
 				}			   
 			   
 			$html .= "</div>\r\n\r\n";
+
+			$args = array(
+				'type'                     => 'post',
+				'child_of'                 => 0,
+				'parent'                   => '',
+				'orderby'                  => 'name',
+				'order'                    => 'ASC',
+				'hide_empty'               => 1,
+				'hierarchical'             => 1,
+				'exclude'                  => '',
+				'include'                  => '',
+				'number'                   => '',
+				'taxonomy'                 => 'collekcii',
+				'pad_counts'               => false
+			);
+
+			$categories = get_categories($args);
+
+			/* TAG:Коллекции */
+			$html .= "<!-- checkbox filters -->\r\n";
+			$html .= "<select \r\n";
+			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
+			   $html .= "\tdata-control-type='select'\r\n";
+			   $html .= "\tdata-control-action='filter'\r\n";
+			   $html .= "\tdata-control-name='collekcii'>\r\n\r\n";
+
+				$html .= "\t<option \r\n";
+				$html .= "\t/>\r\n\r\n";
+
+				$html .= "Коллекция</option>";
+
+			   foreach ($categories as $category) {
+				   $html .= "\t<option \r\n";
+					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
+					  $html .= "\t\tid='jplist-collekcii-" . $category->slug . "' \r\n";
+				   $html .= "\t/>\r\n\r\n";
+
+				   $html .= "$category->name</option>";
+				}
+
+			$html .= "</select>\r\n\r\n";
+
+			/* TAG:Уход */
+			$html .= "<!-- checkbox filters -->\r\n";
+			$html .= "<select \r\n";
+			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
+			   $html .= "\tdata-control-type='select'\r\n";
+			   $html .= "\tdata-control-action='filter'\r\n";
+			   $html .= "\tdata-control-name='uhod'>\r\n\r\n";
+
+				$html .= "\t<option \r\n";
+				$html .= "\t/>\r\n\r\n";
+
+				$html .= "Уход</option>";
+
+			   foreach ($categories as $category) {
+				   $html .= "\t<option \r\n";
+					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
+					  $html .= "\t\tid='jplist-uhod-" . $category->slug . "' \r\n";
+				   $html .= "\t/>\r\n\r\n";
+
+				   $html .= "$category->name</option>";
+				}
+
+			$html .= "</select>\r\n\r\n";
+
+			/* TAG:Тип кожи */
+			$html .= "<!-- checkbox filters -->\r\n";
+			$html .= "<select \r\n";
+			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
+			   $html .= "\tdata-control-type='select'\r\n";
+			   $html .= "\tdata-control-action='filter'\r\n";
+			   $html .= "\tdata-control-name='tip_kozhi'>\r\n\r\n";
+
+				$html .= "\t<option \r\n";
+				$html .= "\t/>\r\n\r\n";
+
+				$html .= "Тип кожи</option>";
+
+			   foreach ($categories as $category) {
+				   $html .= "\t<option \r\n";
+					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
+					  $html .= "\t\tid='jplist-tip_kozhi-" . $category->slug . "' \r\n";
+				   $html .= "\t/>\r\n\r\n";
+
+				   $html .= "$category->name</option>";
+				}
+
+			$html .= "</select>\r\n\r\n";
+
+			/* TAG:Тип средства */
+			$html .= "<!-- checkbox filters -->\r\n";
+			$html .= "<select \r\n";
+			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
+			   $html .= "\tdata-control-type='select'\r\n";
+			   $html .= "\tdata-control-action='filter'\r\n";
+			   $html .= "\tdata-control-name='tip_sredstva'>\r\n\r\n";
+
+				$html .= "\t<option \r\n";
+				$html .= "\t/>\r\n\r\n";
+
+				$html .= "Тип средства</option>";
+
+			   foreach ($categories as $category) {
+				   $html .= "\t<option \r\n";
+					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
+					  $html .= "\t\tid='jplist-tip_sredstva-" . $category->slug . "' \r\n";
+				   $html .= "\t/>\r\n\r\n";
+
+				   $html .= "$category->name</option>";
+				}
+
+			$html .= "</select>\r\n\r\n";
 			
 			return $html;
 		}
