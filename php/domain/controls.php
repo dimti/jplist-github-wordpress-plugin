@@ -48,8 +48,9 @@
 			$this->categories_checkbox_filter = $this->jplist_categories_checkbox_filter();
 			
 			//init default panel html
-			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->content_text_filter . $this->categories_checkbox_filter . $this->pagination_results_top . $this->pagination_top . $this->preloader;
-			$this->bot_panel = $this->items_per_page . $this->sort_dd . $this->pagination_results_bot . $this->pagination_bot;
+//			$this->top_panel = $this->reset_btn . $this->items_per_page . $this->sort_dd . $this->title_text_filter . $this->content_text_filter . $this->categories_checkbox_filter . $this->pagination_results_top . $this->pagination_top . $this->preloader;
+			$this->top_panel = $this->categories_checkbox_filter . $this->preloader;
+			$this->bot_panel = $this->items_per_page . $this->pagination_results_bot . $this->pagination_bot;
 			
 			//init default js settings
 			$this->js_settings = $this->get_js_settings();
@@ -100,6 +101,8 @@
 			   
 			$html .= "</div>\r\n\r\n";
 
+			/* TAG:Коллекции */
+			/*
 			$args = array(
 				'type'                     => 'post',
 				'child_of'                 => 0,
@@ -117,7 +120,6 @@
 
 			$categories = get_categories($args);
 
-			/* TAG:Коллекции */
 			$html .= "<!-- checkbox filters -->\r\n";
 			$html .= "<select \r\n";
 			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
@@ -139,18 +141,35 @@
 				   $html .= "$category->name</option>";
 				}
 
-			$html .= "</select>\r\n\r\n";
+			$html .= "</select>\r\n\r\n";*/
 
 			/* TAG:Уход */
+			$args = array(
+				'type'                     => 'post',
+				'child_of'                 => 0,
+				'parent'                   => '',
+				'orderby'                  => 'name',
+				'order'                    => 'ASC',
+				'hide_empty'               => 1,
+				'hierarchical'             => 1,
+				'exclude'                  => '',
+				'include'                  => '',
+				'number'                   => '',
+				'taxonomy'                 => 'uhod',
+				'pad_counts'               => false
+			);
+
+			$categories = get_categories($args);
+
 			$html .= "<!-- checkbox filters -->\r\n";
 			$html .= "<select \r\n";
-			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
+			   $html .= "\tclass='jplist-group ui floating dropdown'\r\n";
 			   $html .= "\tdata-control-type='select'\r\n";
 			   $html .= "\tdata-control-action='filter'\r\n";
 			   $html .= "\tdata-control-name='uhod'>\r\n\r\n";
 
 				$html .= "\t<option \r\n";
-				$html .= "\t/>\r\n\r\n";
+				$html .= "\t>\r\n\r\n";
 
 				$html .= "Уход</option>";
 
@@ -158,7 +177,7 @@
 				   $html .= "\t<option \r\n";
 					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
 					  $html .= "\t\tid='jplist-uhod-" . $category->slug . "' \r\n";
-				   $html .= "\t/>\r\n\r\n";
+				   $html .= "\t>\r\n\r\n";
 
 				   $html .= "$category->name</option>";
 				}
@@ -166,6 +185,23 @@
 			$html .= "</select>\r\n\r\n";
 
 			/* TAG:Тип кожи */
+			$args = array(
+				'type'                     => 'post',
+				'child_of'                 => 0,
+				'parent'                   => '',
+				'orderby'                  => 'name',
+				'order'                    => 'ASC',
+				'hide_empty'               => 1,
+				'hierarchical'             => 1,
+				'exclude'                  => '',
+				'include'                  => '',
+				'number'                   => '',
+				'taxonomy'                 => 'tip_kozhi',
+				'pad_counts'               => false
+			);
+
+			$categories = get_categories($args);
+
 			$html .= "<!-- checkbox filters -->\r\n";
 			$html .= "<select \r\n";
 			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
@@ -174,7 +210,7 @@
 			   $html .= "\tdata-control-name='tip_kozhi'>\r\n\r\n";
 
 				$html .= "\t<option \r\n";
-				$html .= "\t/>\r\n\r\n";
+				$html .= "\t>\r\n\r\n";
 
 				$html .= "Тип кожи</option>";
 
@@ -182,7 +218,7 @@
 				   $html .= "\t<option \r\n";
 					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
 					  $html .= "\t\tid='jplist-tip_kozhi-" . $category->slug . "' \r\n";
-				   $html .= "\t/>\r\n\r\n";
+				   $html .= "\t>\r\n\r\n";
 
 				   $html .= "$category->name</option>";
 				}
@@ -190,6 +226,23 @@
 			$html .= "</select>\r\n\r\n";
 
 			/* TAG:Тип средства */
+			$args = array(
+				'type'                     => 'post',
+				'child_of'                 => 0,
+				'parent'                   => '',
+				'orderby'                  => 'name',
+				'order'                    => 'ASC',
+				'hide_empty'               => 1,
+				'hierarchical'             => 1,
+				'exclude'                  => '',
+				'include'                  => '',
+				'number'                   => '',
+				'taxonomy'                 => 'tip_sredstva',
+				'pad_counts'               => false
+			);
+
+			$categories = get_categories($args);
+
 			$html .= "<!-- checkbox filters -->\r\n";
 			$html .= "<select \r\n";
 			   $html .= "\tclass='jplist-group ui dropdown'\r\n";
@@ -198,7 +251,7 @@
 			   $html .= "\tdata-control-name='tip_sredstva'>\r\n\r\n";
 
 				$html .= "\t<option \r\n";
-				$html .= "\t/>\r\n\r\n";
+				$html .= "\t>\r\n\r\n";
 
 				$html .= "Тип средства</option>";
 
@@ -206,7 +259,7 @@
 				   $html .= "\t<option \r\n";
 					  $html .= "\t\tdata-path='." . $category->slug . "' \r\n";
 					  $html .= "\t\tid='jplist-tip_sredstva-" . $category->slug . "' \r\n";
-				   $html .= "\t/>\r\n\r\n";
+				   $html .= "\t>\r\n\r\n";
 
 				   $html .= "$category->name</option>";
 				}
